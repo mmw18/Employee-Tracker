@@ -8,10 +8,10 @@ INSERT INTO role (title, salary, department_id) VALUES ('Chef', 55000, 2), ('Wai
 
 -- Employees (first and Last name), their employee ID, and their manager's employee ID
 INSERT INTO employee (first_name, last_name, role_id, manager_id) VALUES 
-('Chandler', 'Bing', 7, 4),
-('Phoebe', 'Buffay', 5, 4),
-('Monica', 'Geller', 1, 4),
-('Ross', 'Geller', 3, 4),
 ('Rachel', 'Green', 4, NULL),
-('Janice', 'Hosenstein', 2, 4),
-('Joey', 'Tribbiani', 6, 4);
+('Chandler', 'Bing', 7, 1),
+('Phoebe', 'Buffay', 5, 1),
+('Monica', 'Geller', 1, 1),
+('Ross', 'Geller', 3, 1),
+('Janice', 'Hosenstein', 2, 1),
+('Joey', 'Tribbiani', 6, 1);
