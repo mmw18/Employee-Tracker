@@ -71,7 +71,21 @@ async function init() {
         init(); // Restarting prompt after operation
         break;
       case 'Update employee role':
-        await employee.updateRole();
+        const updateRoleAnswers = await inquirer.prompt([
+          {
+            type: 'input',
+            name: 'employee_id',
+            message: 'Enter the ID of the employee you want to update:',
+          },
+          {
+            type: 'input',
+            name: 'new_role_id',
+            message: 'Enter the ID of the new role for the employee:',
+          },
+        ]);
+
+        const { employee_id, new_role_id } = updateRoleAnswers;
+        await employee.updateRole(employee_id, new_role_id);
         init(); // Restarting prompt after operation
         break;
       case 'View all roles':
