@@ -1,5 +1,5 @@
-DELETE DATABASE IF EXISTS centralPerk_db;
-CREATE DATABASE IF NOT EXISTS centralPerk_db;
+DROP DATABASE IF EXISTS centralPerk_db;
+CREATE DATABASE centralPerk_db;
 USE centralPerk_db; 
 
 -- Table for DEPARTMENT information
