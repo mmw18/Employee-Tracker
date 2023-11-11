@@ -44,7 +44,30 @@ async function init() {
         init(); // Restarting prompt after operation
         break;
       case 'Add employee':
-        await employee.add();
+        const employeeAnswers = await inquirer.prompt([
+          {
+            type: 'input',
+            name: 'first_name',
+            message: 'Enter the employee\'s first name:',
+          },
+          {
+            type: 'input',
+            name: 'last_name',
+            message: 'Enter the employee\'s last name:',
+          },
+          {
+            type: 'input',
+            name: 'role_id',
+            message: 'Enter the role ID for this employee:',
+          },
+          {
+            type: 'input',
+            name: 'manager_id',
+            message: 'Enter the manager\'s employee ID (if applicable):',
+          },
+        ]);
+        const { first_name, last_name, role_id, manager_id } = employeeAnswers;
+        await employee.add(first_name, last_name, role_id, manager_id);
         init(); // Restarting prompt after operation
         break;
       case 'Update employee role':
@@ -56,7 +79,25 @@ async function init() {
         init(); // Restarting prompt after operation
         break;
       case 'Add role':
-        await role.add();
+        const roleAnswers = await inquirer.prompt([
+          {
+            type: 'input',
+            name: 'title',
+            message: 'Enter the role title:',
+          },
+          {
+            type: 'input',
+            name: 'salary',
+            message: 'Enter the role salary:',
+          },
+          {
+            type: 'input',
+            name: 'department_id',
+            message: 'Enter the department ID for this role:',
+          },
+        ]);
+        const { title, salary, department_id } = roleAnswers;
+        await role.add(title, salary, department_id);
         init(); // Restarting prompt after operation
         break;
       case 'View all departments':
@@ -64,7 +105,13 @@ async function init() {
         init(); // Restarting prompt after operation
         break;
       case 'Add department':
-        await department.add();
+        const departmentNameAnswer = await inquirer.prompt({
+          type: 'input',
+          name: 'name',
+          message: 'Enter the department name:',
+        });
+        const departmentName = departmentNameAnswer.name;
+        await department.add(departmentName);
         init(); // Restarting prompt after operation
         break;
       case 'Exit':
