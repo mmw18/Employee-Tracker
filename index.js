@@ -21,6 +21,10 @@ const employee = new Employee(connection);
 
 // Function that will prompt user for what action they'd like to take
 async function init() {
+
+  let departments; 
+  let roles;
+
   try {
     const answer = await inquirer.prompt({
       type: 'list',
@@ -44,6 +48,9 @@ async function init() {
         init(); // Restarting prompt after operation
         break;
       case 'Add employee':
+        departments = await department.getAllDepartments();
+        roles = await role.getAllRoles();
+        const managers = await employee.getAllManagers();
         const employeeAnswers = await inquirer.prompt([
           {
             type: 'input',
@@ -75,7 +82,8 @@ async function init() {
           {
             type: 'input',
             name: 'employee_id',
-            message: 'Enter the ID of the employee you want to update:',
+            message: "Select the user for whom you'd like to change the role",
+            choices: employee;
           },
           {
             type: 'input',
@@ -93,6 +101,7 @@ async function init() {
         init(); // Restarting prompt after operation
         break;
       case 'Add role':
+        departments = await department.getAllDepartments();
         const roleAnswers = await inquirer.prompt([
           {
             type: 'input',
@@ -107,7 +116,8 @@ async function init() {
           {
             type: 'input',
             name: 'department_id',
-            message: 'Enter the department ID for this role:',
+            message: 'Select the department for this role:',
+            choices: departments
           },
         ]);
         const { title, salary, department_id } = roleAnswers;
