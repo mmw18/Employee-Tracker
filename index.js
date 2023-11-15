@@ -55,22 +55,24 @@ async function init() {
           {
             type: 'input',
             name: 'first_name',
-            message: 'Enter the employee\'s first name:',
+            message: "Enter the employee's first name:",
           },
           {
             type: 'input',
             name: 'last_name',
-            message: 'Enter the employee\'s last name:',
+            message: "Enter the employee's last name:",
           },
           {
-            type: 'input',
+            type: 'list',
             name: 'role_id',
-            message: 'Enter the role ID for this employee:',
+            message: 'Select the role for this employee',
+            choices: roles
           },
           {
-            type: 'input',
+            type: 'list',
             name: 'manager_id',
-            message: 'Enter the manager\'s employee ID (if applicable):',
+            message: 'Choose the manager for this employee',
+            choices: managers
           },
         ]);
         const { first_name, last_name, role_id, manager_id } = employeeAnswers;
@@ -78,17 +80,20 @@ async function init() {
         init(); // Restarting prompt after operation
         break;
       case 'Update employee role':
+        const employees = await employee.getAllEmployees();
+        role = await role.getAllRoles();
         const updateRoleAnswers = await inquirer.prompt([
           {
-            type: 'input',
+            type: 'list',
             name: 'employee_id',
             message: "Select the user for whom you'd like to change the role",
-            choices: employee;
+            choices: employees
           },
           {
-            type: 'input',
+            type: 'list',
             name: 'new_role_id',
-            message: 'Enter the ID of the new role for the employee:',
+            message: 'Select the new role for the employee',
+            choices: role
           },
         ]);
 
@@ -114,7 +119,7 @@ async function init() {
             message: 'Enter the role salary:',
           },
           {
-            type: 'input',
+            type: 'list',
             name: 'department_id',
             message: 'Select the department for this role:',
             choices: departments
