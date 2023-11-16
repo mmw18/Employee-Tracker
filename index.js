@@ -81,7 +81,7 @@ async function init() {
         break;
       case 'Update employee role':
         const employees = await employee.getAllEmployees();
-        role = await role.getAllRoles();
+        const allRoles = await role.getAllRoles();
         const updateRoleAnswers = await inquirer.prompt([
           {
             type: 'list',
@@ -93,7 +93,7 @@ async function init() {
             type: 'list',
             name: 'new_role_id',
             message: 'Select the new role for the employee',
-            choices: role
+            choices: allRoles
           },
         ]);
 
